@@ -1,5 +1,5 @@
 /* =========================================
-   Portfolio Assignment 1
+   Portfolio Assignment 2
    Main Stylesheet
    ========================================= */
 
@@ -340,6 +340,80 @@ a {
 /* =========================================
    Projects
    ========================================= */
+
+
+/* ---------- Project Search ---------- */
+
+.project-search {
+    max-width: 700px;
+}
+
+.project-search label {
+    display: block;
+
+    margin-bottom: 0.5rem;
+
+    font-weight: 700;
+}
+
+.project-search input {
+    width: 100%;
+
+    padding: 0.8rem;
+
+    border:
+        1px solid
+        var(--border-color);
+
+    border-radius: 8px;
+
+    background-color:
+        var(--surface-color);
+
+    color:
+        var(--text-color);
+
+    font: inherit;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        background-color 0.3s ease;
+}
+
+.project-search input::placeholder {
+    color: var(--muted-color);
+
+    opacity: 1;
+}
+
+.project-search input:focus {
+    border-color:
+        var(--primary-color);
+
+    box-shadow:
+        0 0 0 3px
+        rgba(37, 99, 235, 0.15);
+}
+
+.search-help {
+    margin-top: 0.5rem;
+
+    color: var(--muted-color);
+
+    font-size: 0.9rem;
+}
+
+.search-status {
+    margin-top: 0.75rem;
+
+    min-height: 1.6em;
+
+    font-weight: 700;
+}
+
+
+/* ---------- Project Cards ---------- */
 
 .projects-grid {
     display: grid;
