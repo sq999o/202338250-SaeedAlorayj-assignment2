@@ -703,3 +703,19 @@ textarea:focus-visible {
     }
 
 }
+/* ---------- Theme Storage Feedback ---------- */
+
+.theme-message:not(:empty) {
+    max-width: 650px;
+
+    margin-bottom: 1rem;
+    padding: 0.75rem 1rem;
+
+    border: 1px solid rgba(255, 255, 255, 0.55);
+    border-radius: 8px;
+
+    background-color: rgba(0, 0, 0, 0.18);
+    color: white;
+
+    font-size: 0.95rem;
+}

@@ -1,7 +1,10 @@
 // Portfolio Assignment 2
-// Handles the theme toggle, live project search, and contact form interaction.
+// Handles theme preferences, live project search, and contact form interaction.
 
 const themeToggle = document.getElementById("theme-toggle");
+const themeMessage = document.getElementById("theme-message");
+const themeStorageKey = "portfolio-theme";
+
 const contactForm = document.getElementById("contact-form");
 const formMessage = document.getElementById("form-message");
 
@@ -10,16 +13,65 @@ const projectSearchStatus = document.getElementById("project-search-status");
 const projectCards = document.querySelectorAll(".project-card");
 
 
-// Dark / Light theme
-themeToggle.addEventListener("click", function () {
-    document.body.classList.toggle("dark-theme");
+// Apply the selected theme and update the button label.
+function applyTheme(theme) {
+    const isDark = theme === "dark";
 
-    if (document.body.classList.contains("dark-theme")) {
+    document.body.classList.toggle("dark-theme", isDark);
+
+    if (isDark) {
         themeToggle.textContent = "Light Mode";
     } else {
         themeToggle.textContent = "Dark Mode";
     }
+}
+
+
+// Restore the saved theme when the page loads.
+function loadTheme() {
+    themeMessage.textContent = "";
+
+    try {
+        const savedTheme = localStorage.getItem(themeStorageKey);
+
+        if (savedTheme === "dark" || savedTheme === "light") {
+            applyTheme(savedTheme);
+        } else {
+            applyTheme("light");
+        }
+    } catch (error) {
+        applyTheme("light");
+
+        themeMessage.textContent =
+            "Your saved theme could not be loaded. " +
+            "Use the theme button to choose a theme for this visit.";
+    }
+}
+
+
+// Change the theme and try to save the preference.
+themeToggle.addEventListener("click", function () {
+    let selectedTheme = "dark";
+
+    if (document.body.classList.contains("dark-theme")) {
+        selectedTheme = "light";
+    }
+
+    // Keep theme switching functional even if saving fails.
+    applyTheme(selectedTheme);
+
+    try {
+        localStorage.setItem(themeStorageKey, selectedTheme);
+
+        themeMessage.textContent = "";
+    } catch (error) {
+        themeMessage.textContent =
+            "Theme changed for this visit, but your preference could not be saved. " +
+            "Choose your theme again next time.";
+    }
 });
+
+loadTheme();
 
 
 // Live project search
