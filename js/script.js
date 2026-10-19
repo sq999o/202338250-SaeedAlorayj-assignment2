@@ -1,5 +1,5 @@
 // Portfolio Assignment 2
-// Handles theme preferences, live project search, and contact form interaction.
+// Handles theme preferences, live project search, and contact form validation.
 
 const themeToggle = document.getElementById("theme-toggle");
 const themeMessage = document.getElementById("theme-message");
@@ -7,6 +7,10 @@ const themeStorageKey = "portfolio-theme";
 
 const contactForm = document.getElementById("contact-form");
 const formMessage = document.getElementById("form-message");
+const nameInput = document.getElementById("name");
+const emailInput = document.getElementById("email");
+const messageInput = document.getElementById("message");
+const contactFields = contactForm.querySelectorAll("input, textarea");
 
 const projectSearch = document.getElementById("project-search");
 const projectSearchStatus = document.getElementById("project-search-status");
@@ -117,14 +121,72 @@ projectSearch.addEventListener("input", filterProjects);
 filterProjects();
 
 
-// Contact form interaction
+// Contact form validation
+
+// Use our in-page feedback instead of automatic browser validation popups.
+contactForm.noValidate = true;
+
+function clearFormFeedback() {
+    formMessage.textContent = "";
+    formMessage.classList.remove("error", "success");
+
+    contactFields.forEach(function (field) {
+        field.removeAttribute("aria-invalid");
+        field.removeAttribute("aria-describedby");
+    });
+}
+
+function showFormError(message, field) {
+    formMessage.textContent = message;
+    formMessage.classList.add("error");
+
+    field.setAttribute("aria-invalid", "true");
+    field.setAttribute("aria-describedby", "form-message");
+
+    field.focus();
+}
+
+// Remove outdated feedback when the user edits the form.
+contactForm.addEventListener("input", clearFormFeedback);
+
 contactForm.addEventListener("submit", function (event) {
     event.preventDefault();
 
-    const nameInput = document.getElementById("name");
+    clearFormFeedback();
+
+    // Trim surrounding spaces before checking the values.
+    nameInput.value = nameInput.value.trim();
+    emailInput.value = emailInput.value.trim();
+    messageInput.value = messageInput.value.trim();
+
+    if (nameInput.value === "") {
+        showFormError("Please enter your name.", nameInput);
+        return;
+    }
+
+    if (emailInput.value === "") {
+        showFormError("Please enter your email address.", emailInput);
+        return;
+    }
+
+    if (emailInput.validity.typeMismatch) {
+        showFormError(
+            "Please enter a valid email address, such as name@example.com.",
+            emailInput
+        );
+        return;
+    }
+
+    if (messageInput.value === "") {
+        showFormError("Please enter a message.", messageInput);
+        return;
+    }
 
     formMessage.textContent =
-        `Thanks, ${nameInput.value}! Your message has been received.`;
+        `Thanks, ${nameInput.value}! Your input is valid. ` +
+        "This demo does not send messages.";
+
+    formMessage.classList.add("success");
 
     contactForm.reset();
 });

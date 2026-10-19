@@ -719,3 +719,34 @@ textarea:focus-visible {
 
     font-size: 0.95rem;
 }
+/* ---------- Form Feedback Colors ---------- */
+
+:root {
+    --error-color: #b91c1c;
+    --success-color: #166534;
+}
+
+body.dark-theme {
+    --error-color: #fca5a5;
+    --success-color: #86efac;
+}
+
+
+/* ---------- Form Validation Feedback ---------- */
+
+.form-message {
+    transition: color 0.2s ease;
+}
+
+.form-message.error {
+    color: var(--error-color);
+}
+
+.form-message.success {
+    color: var(--success-color);
+}
+
+.form-group input[aria-invalid="true"],
+.form-group textarea[aria-invalid="true"] {
+    border-color: var(--error-color);
+}
