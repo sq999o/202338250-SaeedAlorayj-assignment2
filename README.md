@@ -1,91 +1,69 @@
-# Portfolio Assignment 1
+# Portfolio Assignment 2 – Interactive Features
 
 ## Project Description
 
-This project is a responsive personal portfolio website created for SWE 363.
+This SWE 363 portfolio extends Assignment 1 using HTML, CSS, and JavaScript. It introduces Saeed Alorayj, a Computer Science student at KFUPM, and presents the SocialBook CSS Selectors Practice and Campus Events Dashboard projects.
 
-The website introduces me as a Computer Science student at KFUPM and includes information about me, examples of my web development work, and a contact form.
+## Features and Progress
 
-The project was built using HTML, CSS, and JavaScript.
+| Area | Assignment 1 | Assignment 2 |
+| --- | --- | --- |
+| Projects | Two static cards | Live title/description search, result count, and no-results feedback |
+| Theme | Dark/light toggle | Saved preference in localStorage, restoration on load, and storage-error messages |
+| Contact | Basic confirmation | Blank/whitespace checks, email-format validation, first-error focus, and clear success/error feedback |
+| Motion | Hover effects and smooth scrolling | Retained effects plus search-field and feedback-color transitions |
 
-## Features
+The responsive layout, About section, navigation, and local SVG project placeholders are retained.
 
-- Responsive design for desktop, tablet, and mobile devices
-- About Me section
-- Projects section with two project examples
-- Contact form with Name, Email, and Message fields
-- Dark and Light theme toggle
-- Contact form interaction using JavaScript
-- Smooth navigation between page sections
+## Project Files
 
-## Projects Included
+| File | Purpose |
+| --- | --- |
+| `index.html` | Content, project cards, search, and form |
+| `css/styles.css` | Layout, themes, responsive rules, and transitions |
+| `js/script.js` | Search, storage, and validation |
+| `assets/images/` | Two SVG project illustrations |
+| `docs/technical-documentation.md` | Implementation and testing |
+| `docs/ai-usage-report.md` | AI usage log and declaration |
+| `.gitignore` | Excludes editor/OS files and AI evidence from the repository |
 
-### SocialBook – CSS Selectors Practice
+## Run Locally
 
-A social media-style webpage used to practice CSS selectors, specificity, hover effects, typography, and styling.
+If the project folder is already on your computer, open that copy; do not clone again.
 
-### Campus Events Dashboard
+1. For a first download only:
 
-A responsive dashboard used to practice Flexbox, CSS variables, the box model, positioning, gradients, and hover effects.
+   ```bash
+   git clone https://github.com/sq999o/202338250-SaeedAlorayj-assignment2.git
+   ```
 
-## Technologies Used
+2. Open the project folder in VS Code.
+3. Install the Live Server extension if needed.
+4. Open `index.html` and click **Go Live**.
+5. Use the local HTTP address opened by Live Server.
 
-- HTML5
-- CSS3
-- JavaScript
-- CSS Grid
-- Flexbox
-- Media Queries
-- Git and GitHub
+No application packages, build command, backend, or API key are required. Use the same browser and address, including the port, when testing theme persistence.
 
-## Project Structure
-```text
-assignment-1/
-├── README.md
-├── index.html
-├── css/
-│   └── styles.css
-├── js/
-│   └── script.js
-├── assets/
-│   └── images/
-│       ├── project1.svg
-│       └── project2.svg
-├── docs/
-│   ├── ai-usage-report.md
-│   └── technical-documentation.md
-└── .gitignore
-```
+## How to Use
 
-## How to Run the Project Locally
+- Navigate with About, Projects, and Contact.
+- Search for `Campus`, `socialbook`, or `Flexbox`. Clear the search to restore all cards.
+- Switch the theme and reload to check the saved preference.
+- Complete the contact fields and press **Validate Message**. Correct any field identified by an error.
 
-1. Clone the repository to your computer.
-2. Open the project folder in a code editor such as VS Code.
-3. Open `index.html` in a web browser.
+The form validates locally; it does not send messages or verify that an email address exists. The application stores only the selected theme, not contact details.
 
-No additional packages or dependencies are required.
+## Documentation and AI Use
 
-## AI Usage
+ChatGPT helped generate code, explain it, suggest tests, review the project, and draft documentation. The student integrated the changes, followed the explanations, and reported testing the features.
 
-ChatGPT was used during this assignment to help with planning, explanations, debugging, code review, and documentation.
+- [Technical documentation and test checklist](docs/technical-documentation.md)
+- [AI usage log and declaration](docs/ai-usage-report.md)
 
-The AI-generated suggestions were reviewed, tested, and modified during development.
-
-More details are available in:
-
-`docs/ai-usage-report.md`
-
-## Responsive Design
-
-The website was tested at different browser widths to make sure it works properly on:
-
-- Desktop
-- Tablet
-- Mobile
-
-CSS Grid, Flexbox, and media queries were used to create the responsive layout.
+Under the course announcement, full AI conversations and intermediate AI outputs must be submitted separately on Blackboard as `202338250-SaeedAlorayj-assignment2-ai-evidence.zip`. The evidence ZIP must not be committed to this repository.
 
 ## Author
 
 Saeed Alorayj  
+Student ID: 202338250  
 Computer Science Student at KFUPM

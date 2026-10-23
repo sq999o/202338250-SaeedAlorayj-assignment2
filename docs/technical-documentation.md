@@ -1,163 +1,136 @@
-# Technical Documentation
+# Technical Documentation – Assignment 2
 
-## 1. Project Overview
+## 1. Requirements and Structure
 
-This project is a responsive personal portfolio website built using HTML, CSS, and JavaScript.
+| Requirement | Implementation |
+| --- | --- |
+| Dynamic content | Live project search and updated result counts |
+| Data handling | Theme storage and form validation |
+| Transitions | Hover movements, smooth section navigation, and focus/color transitions |
+| Error handling | Empty results, storage failures, invalid fields, and recovery instructions |
 
-The website contains three main sections:
+The assignment requires at least one data-handling option; this project does not need an external API.
 
-- About Me
-- Projects
-- Contact
+The HTML contains the header, navigation, About, Projects, Contact, and footer. CSS and JavaScript are in separate files. The script uses `defer`, selects the existing element IDs, registers event handlers, and initializes the theme and search results.
 
-It also includes responsive design and basic JavaScript interactions.
+## 2. Live Search
 
-## 2. HTML Structure
+The `input` event calls `filterProjects()`. The query is trimmed, lowercased, and normalized with `replace(/\s+/g, " ")`. Card text is also lowercased and whitespace-normalized.
 
-The main HTML file is:
+The function uses `includes()` for substring matching, changes each card's `hidden` property, and counts visible cards. An empty or spaces-only query displays all projects. Zero matches produce instructions to change or clear the query.
 
-`index.html`
+Search covers titles and descriptions. It is not fuzzy search or independent-word matching.
 
-The page is divided into the following main parts:
+## 3. Theme Persistence
 
-### Header and Navigation
+`applyTheme()` toggles the body's `dark-theme` class and updates the button label. The stored key is `portfolio-theme`; recognized values are `dark` and `light`.
 
-The header contains:
+`loadTheme()` restores a recognized value. A missing or unsupported value defaults to light. A read exception defaults to light and displays a recovery message.
 
-- My name
-- Navigation links
-- Dark/Light mode button
-- Introductory text and tagline
+A click applies the chosen theme before attempting `setItem()`. A failed save therefore does not prevent the visual change. Its message explains that the choice must be made again next time.
 
-### About Me
+Storage belongs to the browser profile and origin. Different hosts or ports can have different saved preferences. New tabs load the saved value, but already-open tabs do not automatically synchronize.
 
-The About Me section contains a short introduction about me as a Computer Science student at KFUPM.
+## 4. Form Validation
 
-### Projects
+The form is a local demo without a backend or delivery service.
 
-The Projects section contains two project cards.
+- `preventDefault()` prevents normal submission.
+- `noValidate` disables automatic validation popups while the script runs.
+- Values are trimmed before validation.
+- Checks run in order: name, email presence, email format, message.
+- The email field is `type="email"`; `validity.typeMismatch` checks its format.
+- Processing stops at the first error using `return`.
+- `showFormError()` displays a message, marks the field with `aria-invalid`, connects the message using `aria-describedby`, and focuses the field.
+- Input events clear outdated feedback.
+- Valid input produces a success message explaining that nothing was sent, then resets the form.
 
-Each project includes:
+Messages use `textContent`, so the user's name is displayed as text. Email-format validation does not establish that an address exists.
 
-- Project image
-- Project title
-- Short description
+## 5. Presentation and Accessibility
 
-### Contact
+CSS variables define both themes. Grid arranges cards and Flexbox arranges navigation and form elements.
 
-The Contact section contains a form with:
+| Width | Behavior |
+| --- | --- |
+| Above 850 px | Two project columns |
+| 850 px and below | One project column; navigation wraps |
+| 600 px and below | Navigation stacks; hero buttons expand; spacing and text sizes adjust |
 
-- Name
-- Email
-- Message
-- Submit button
+Buttons/cards have small hover movements, fields have focus transitions, and section navigation scrolls smoothly.
 
-The form does not use a backend.
+Labels identify inputs. Images have alternative text. Interactive elements have visible keyboard-focus outlines. Search, theme, and form messages use `role="status"`; feedback is communicated with text as well as color. These features are not a claim of a complete accessibility audit.
 
-## 3. CSS Design
+## 6. Setup and Limitations
 
-The main stylesheet is located at:
+Follow the [README](../README.md) and run with Live Server. Keep the same browser and local address when testing storage.
 
-`css/styles.css`
+There is no API fetch, database, contact-data persistence, or message delivery. Browser storage can be blocked or cleared. Project images are placeholders.
 
-The CSS is used for:
+## 7. Verification Scope
 
-- Page colors
-- Layout
-- Typography
-- Buttons
-- Project cards
-- Contact form
-- Dark theme
-- Responsive design
+The student reported completing the guided search, saved-theme, simulated storage-failure, and form-validation tests.
 
-CSS variables are used to keep the colors organized.
+The source review checked JavaScript syntax, unique element IDs, label/ARIA references, local assets, navigation targets, and feature implementation. It corrected the contact introduction to say the form does not send messages.
 
-## 4. Responsive Design
+A browser-based visual test was unavailable in the review environment. The table below lists expected results, not verified results for every browser/device.
 
-The website was designed to work on different screen sizes.
+## 8. Manual Test Checklist
 
-### Desktop
+| Test | Expected result |
+| --- | --- |
+| Empty search or spaces only | Both cards appear |
+| `socialbook` | SocialBook only |
+| `CAMPUS` or `Flexbox` | Campus Events only |
+| `CSS` | Both projects |
+| `  CSS   Selectors  ` | SocialBook only |
+| `zzzz` | No cards and helpful no-results text |
+| Clear search | Both cards return |
+| Choose dark, reload | Dark theme remains; button says Light Mode |
+| Choose light, reload | Light theme remains; button says Dark Mode |
+| Open same address in a new tab | Last saved theme loads |
+| Blank form or spaces-only name | Name error and focus |
+| Name present, email blank | Email-required error |
+| Email `invalid-email` | Email-format error |
+| Valid name/email, blank message | Message-required error |
+| Valid name, `test@example.com`, and message | Confirmation; form clears; nothing is sent |
+| Type after feedback | Old feedback clears |
+| Repeat errors/success in dark theme | Feedback remains readable |
+| Widths 375, 768, 1440 px | Readable layout and no horizontal page overflow |
+| Keyboard Tab, Enter, Space | Visible focus and operable controls |
+| Another installed browser | Search, theme, form, images, and navigation work |
+| Browser Console | No unexpected JavaScript errors |
 
-The project cards are displayed in two columns.
+### Temporary Storage-Failure Tests
 
-The navigation is displayed horizontally.
+Run only in the browser Console on the local test page. Refresh after each test to restore the original methods.
 
-### Tablet
+For a failed save:
 
-The layout becomes more compact and the project cards move into one column.
+```javascript
+Storage.prototype.setItem = function () {
+    throw new Error("Storage test");
+};
+```
 
-### Mobile
+Click the theme button. The theme should change and a save-error message should appear.
 
-Navigation elements are rearranged to fit smaller screens.
+For a failed load:
 
-Buttons expand to use the available width.
+```javascript
+Storage.prototype.getItem = function () {
+    throw new Error("Storage test");
+};
+loadTheme();
+```
 
-Text sizes and spacing are adjusted.
+The page should use the light theme and display a load-error message. Refresh afterward.
 
-Responsive behavior is implemented using media queries, Flexbox, and CSS Grid.
+### Final Local Test Record
 
-## 5. JavaScript Features
+Complete with actual results before submission:
 
-The JavaScript file is located at:
-
-`js/script.js`
-
-### Dark and Light Mode
-
-The theme button switches the page between Dark Mode and Light Mode.
-
-JavaScript adds or removes the `dark-theme` class from the page.
-
-### Contact Form Interaction
-
-The contact form uses JavaScript to prevent the normal form submission.
-
-After the user enters valid information and presses the submit button, a confirmation message is displayed.
-
-The form is then cleared.
-
-No backend or database is used.
-
-## 6. Project Images
-
-Project images are stored in:
-
-`assets/images/`
-
-The project uses two SVG placeholder images:
-
-- `project1.svg`
-- `project2.svg`
-
-## 7. Testing
-
-I tested the website by:
-
-- Opening it in a web browser
-- Testing the navigation links
-- Testing Dark Mode and Light Mode
-- Testing the contact form
-- Resizing the browser window
-- Checking desktop, tablet, and mobile layouts
-- Checking that the project images load correctly
-
-## 8. Technologies Used
-
-- HTML5
-- CSS3
-- JavaScript
-- Flexbox
-- CSS Grid
-- Media Queries
-- Git
-- GitHub
-
-## 9. How to Run the Project
-
-No additional packages are required.
-
-To run the website:
-
-1. Open the project folder.
-2. Open `index.html` in a web browser.
+- Browser/version: **[Enter actual browser/version.]**
+- Additional browser: **[Enter actual browser/version or not tested.]**
+- Widths checked: **[Enter actual widths.]**
+- Results and remaining issues: **[Record actual results.]**
