@@ -43,6 +43,7 @@ Dates below refer to the known Assignment 2 development artifacts. Model version
 | A20 | ChatGPT | 2026-10-23 | Final documentation preparation | README.md; docs/ai-usage-report.md; docs/technical-documentation.md | Prepared revised documentation and a provisional declaration; those provisional evidence/declaration sections are superseded by the official requirements below |
 
 | A21 | ChatGPT | 2026-10-23 | Official-requirements documentation correction | README.md; docs/ai-usage-report.md | Replaced the provisional declaration with the exact supplied statement, restored full-evidence requirements, aligned artifact IDs and folder names with the instructions |
+| A22 | ChatGPT | 2026-10-24 | Final submission preparation and AI evidence review | docs/ai-usage-report.md; separate AI evidence archive | Reviewed the AI-assisted development record, updated the description of my contributions and verification activities, organized the available conversation records and documentation artifacts, and prepared the evidence archive for submission. |
 
 Verification for the code outputs: the student reported completing the guided feature tests, and the later source review checked syntax and HTML references. Exact per-artifact verification details must be reconciled with the saved evidence before signing.
 
