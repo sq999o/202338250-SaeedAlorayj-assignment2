@@ -126,11 +126,8 @@ loadTheme();
 
 The page should use the light theme and display a load-error message. Refresh afterward.
 
-### Final Local Test Record
+### Recorded Local Checks
 
-Complete with actual results before submission:
+The student reported completing the guided feature tests. A supplied screenshot showed the local page in Chrome at 127.0.0.1:5500 with a narrow layout and one project column. The Console showed a missing favicon request; this does not establish a JavaScript execution error.
 
-- Browser/version: **[Enter actual browser/version.]**
-- Additional browser: **[Enter actual browser/version or not tested.]**
-- Widths checked: **[Enter actual widths.]**
-- Results and remaining issues: **[Record actual results.]**
+Exact viewport dimensions, browser versions, detailed keyboard-test outcomes, and results from a second browser were not recorded. The checklist above remains a list of expected behaviors, not a claim that every listed compatibility test passed.

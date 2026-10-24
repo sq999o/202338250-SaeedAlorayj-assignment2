@@ -60,7 +60,7 @@ ChatGPT helped generate code, explain it, suggest tests, review the project, and
 - [Technical documentation and test checklist](docs/technical-documentation.md)
 - [AI usage log and declaration](docs/ai-usage-report.md)
 
-Under the course announcement, full AI conversations and intermediate AI outputs must be submitted separately on Blackboard as `202338250-SaeedAlorayj-assignment2-ai-evidence.zip`. The evidence ZIP must not be committed to this repository.
+Full AI conversations and original intermediate AI-generated outputs are submitted separately on Blackboard as `202338250-SaeedAlorayj-assignment2-ai-evidence.zip`, using `conversations/` and `artifacts/` folders. Conversation logs and the evidence ZIP must not be committed to this repository. The AI usage report contains the usage log and required declaration. A reconstructed summary does not replace the required original conversations.
 
 ## Author
 
